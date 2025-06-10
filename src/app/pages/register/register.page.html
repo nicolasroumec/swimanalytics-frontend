@@ -1,0 +1,279 @@
+<div class="register-container">
+  <div class="header">
+    <div class="logo-container">
+      <img src="logo.png" alt="Swim Analytics Logo" class="logo">
+    </div>
+  </div>
+
+  <div class="main-content">
+    <div class="register-card">
+      <div class="back-button">
+        <button mat-icon-button (click)="goBack()" class="back-btn">
+          <mat-icon>arrow_back</mat-icon>
+        </button>
+      </div>
+
+      <h1 class="register-title">Crear Cuenta</h1>
+      <p class="register-subtitle">Únete a Swim Analytics y mejora tu rendimiento</p>
+
+      <form [formGroup]="registerForm" (ngSubmit)="onRegister()" class="register-form">
+        <!-- Información Personal -->
+        <div class="form-section">
+          <h3 class="section-title">Información Personal</h3>
+
+          <div class="form-row">
+            <mat-form-field appearance="outline" class="form-field half-width">
+              <mat-label>Nombre</mat-label>
+              <input matInput
+                     type="text"
+                     formControlName="firstName"
+                     placeholder="Tu nombre">
+              <mat-icon matSuffix>person</mat-icon>
+              <mat-error *ngIf="firstName?.hasError('required') && firstName?.touched">
+                El nombre es requerido
+              </mat-error>
+              <mat-error *ngIf="firstName?.hasError('minlength') && firstName?.touched">
+                Mínimo 2 caracteres
+              </mat-error>
+            </mat-form-field>
+
+            <mat-form-field appearance="outline" class="form-field half-width">
+              <mat-label>Apellido</mat-label>
+              <input matInput
+                     type="text"
+                     formControlName="lastName"
+                     placeholder="Tu apellido">
+              <mat-icon matSuffix>person</mat-icon>
+              <mat-error *ngIf="lastName?.hasError('required') && lastName?.touched">
+                El apellido es requerido
+              </mat-error>
+              <mat-error *ngIf="lastName?.hasError('minlength') && lastName?.touched">
+                Mínimo 2 caracteres
+              </mat-error>
+            </mat-form-field>
+          </div>
+
+          <mat-form-field appearance="outline" class="form-field">
+            <mat-label>Email</mat-label>
+            <input matInput
+                   type="email"
+                   formControlName="email"
+                   placeholder="tu@email.com">
+            <mat-icon matSuffix>email</mat-icon>
+            <mat-error *ngIf="email?.hasError('required') && email?.touched">
+              El email es requerido
+            </mat-error>
+            <mat-error *ngIf="email?.hasError('email') && email?.touched">
+              Ingresa un email válido
+            </mat-error>
+          </mat-form-field>
+
+          <mat-form-field appearance="outline" class="form-field">
+            <mat-label>Teléfono</mat-label>
+            <input matInput
+                   type="tel"
+                   formControlName="phone"
+                   placeholder="+54 11 1234-5678">
+            <mat-icon matSuffix>phone</mat-icon>
+            <mat-error *ngIf="phone?.hasError('required') && phone?.touched">
+              El teléfono es requerido
+            </mat-error>
+            <mat-error *ngIf="phone?.hasError('pattern') && phone?.touched">
+              Formato de teléfono inválido
+            </mat-error>
+          </mat-form-field>
+
+          <div class="form-row">
+            <mat-form-field appearance="outline" class="form-field half-width">
+              <mat-label>Fecha de Nacimiento</mat-label>
+              <input matInput
+                     type="date"
+                     formControlName="dateOfBirth">
+              <mat-icon matSuffix>cake</mat-icon>
+              <mat-error *ngIf="dateOfBirth?.hasError('required') && dateOfBirth?.touched">
+                La fecha de nacimiento es requerida
+              </mat-error>
+            </mat-form-field>
+
+            <mat-form-field appearance="outline" class="form-field half-width">
+              <mat-label>Género</mat-label>
+              <mat-select formControlName="gender">
+                <mat-option [value]="Gender.Male">Masculino</mat-option>
+                <mat-option [value]="Gender.Female">Femenino</mat-option>
+              </mat-select>
+              <mat-icon matSuffix>wc</mat-icon>
+              <mat-error *ngIf="gender?.hasError('required') && gender?.touched">
+                Selecciona tu género
+              </mat-error>
+            </mat-form-field>
+          </div>
+        </div>
+
+        <!-- Información Física -->
+        <div class="form-section">
+          <h3 class="section-title">Información Física</h3>
+
+          <div class="form-row">
+            <mat-form-field appearance="outline" class="form-field third-width">
+              <mat-label>Altura (cm)</mat-label>
+              <input matInput
+                     type="number"
+                     formControlName="height"
+                     placeholder="175"
+                     min="100"
+                     max="250">
+              <mat-icon matSuffix>height</mat-icon>
+              <mat-error *ngIf="height?.hasError('required') && height?.touched">
+                La altura es requerida
+              </mat-error>
+              <mat-error *ngIf="height?.hasError('min') && height?.touched">
+                Altura mínima: 100 cm
+              </mat-error>
+              <mat-error *ngIf="height?.hasError('max') && height?.touched">
+                Altura máxima: 250 cm
+              </mat-error>
+            </mat-form-field>
+
+            <mat-form-field appearance="outline" class="form-field third-width">
+              <mat-label>Peso (kg)</mat-label>
+              <input matInput
+                     type="number"
+                     formControlName="weight"
+                     placeholder="70"
+                     min="30"
+                     max="200"
+                     step="0.1">
+              <mat-icon matSuffix>monitor_weight</mat-icon>
+              <mat-error *ngIf="weight?.hasError('required') && weight?.touched">
+                El peso es requerido
+              </mat-error>
+              <mat-error *ngIf="weight?.hasError('min') && weight?.touched">
+                Peso mínimo: 30 kg
+              </mat-error>
+              <mat-error *ngIf="weight?.hasError('max') && weight?.touched">
+                Peso máximo: 200 kg
+              </mat-error>
+            </mat-form-field>
+
+            <mat-form-field appearance="outline" class="form-field third-width">
+              <mat-label>Envergadura (cm)</mat-label>
+              <input matInput
+                     type="number"
+                     formControlName="wingspan"
+                     placeholder="180"
+                     min="100"
+                     max="300">
+              <mat-icon matSuffix>straighten</mat-icon>
+              <mat-error *ngIf="wingspan?.hasError('required') && wingspan?.touched">
+                La envergadura es requerida
+              </mat-error>
+              <mat-error *ngIf="wingspan?.hasError('min') && wingspan?.touched">
+                Envergadura mínima: 100 cm
+              </mat-error>
+              <mat-error *ngIf="wingspan?.hasError('max') && wingspan?.touched">
+                Envergadura máxima: 300 cm
+              </mat-error>
+            </mat-form-field>
+          </div>
+        </div>
+
+        <!-- Información de Natación -->
+        <div class="form-section">
+          <h3 class="section-title">Información de Natación</h3>
+
+          <mat-form-field appearance="outline" class="form-field">
+            <mat-label>Club/Equipo (Opcional)</mat-label>
+            <input matInput
+                   type="text"
+                   formControlName="club"
+                   placeholder="Nombre de tu club o equipo">
+            <mat-icon matSuffix>pool</mat-icon>
+          </mat-form-field>
+        </div>
+
+        <!-- Contraseña -->
+        <div class="form-section">
+          <h3 class="section-title">Seguridad</h3>
+
+          <mat-form-field appearance="outline" class="form-field">
+            <mat-label>Contraseña</mat-label>
+            <input matInput
+                   [type]="hidePassword ? 'password' : 'text'"
+                   formControlName="password"
+                   placeholder="Mínimo 8 caracteres">
+            <button mat-icon-button
+                    matSuffix
+                    (click)="hidePassword = !hidePassword"
+                    type="button">
+              <mat-icon>{{hidePassword ? 'visibility_off' : 'visibility'}}</mat-icon>
+            </button>
+            <mat-error *ngIf="password?.hasError('required') && password?.touched">
+              La contraseña es requerida
+            </mat-error>
+            <mat-error *ngIf="password?.hasError('minlength') && password?.touched">
+              La contraseña debe tener al menos 8 caracteres
+            </mat-error>
+            <mat-error *ngIf="password?.hasError('passwordStrength') && password?.touched">
+              La contraseña debe contener mayúsculas, minúsculas y números
+            </mat-error>
+          </mat-form-field>
+
+          <mat-form-field appearance="outline" class="form-field">
+            <mat-label>Confirmar Contraseña</mat-label>
+            <input matInput
+                   [type]="hideConfirmPassword ? 'password' : 'text'"
+                   formControlName="confirmPassword"
+                   placeholder="Repite tu contraseña">
+            <button mat-icon-button
+                    matSuffix
+                    (click)="hideConfirmPassword = !hideConfirmPassword"
+                    type="button">
+              <mat-icon>{{hideConfirmPassword ? 'visibility_off' : 'visibility'}}</mat-icon>
+            </button>
+            <mat-error *ngIf="confirmPassword?.hasError('required') && confirmPassword?.touched">
+              Confirma tu contraseña
+            </mat-error>
+            <mat-error *ngIf="registerForm.hasError('passwordMismatch') && confirmPassword?.touched">
+              Las contraseñas no coinciden
+            </mat-error>
+          </mat-form-field>
+        </div>
+
+        <!-- Términos y Condiciones -->
+        <div class="form-section">
+          <mat-checkbox formControlName="acceptTerms" class="terms-checkbox">
+            Acepto los
+            <a href="#" class="terms-link" (click)="openTerms($event)">Términos y Condiciones</a>
+            y la
+            <a href="#" class="terms-link" (click)="openPrivacy($event)">Política de Privacidad</a>
+          </mat-checkbox>
+          <mat-error *ngIf="acceptTerms?.hasError('required') && acceptTerms?.touched" class="terms-error">
+            Debes aceptar los términos y condiciones
+          </mat-error>
+        </div>
+
+        <div class="form-actions">
+          <button mat-raised-button
+                  color="primary"
+                  type="submit"
+                  class="register-btn"
+                  [disabled]="registerForm.invalid || isLoading">
+            <mat-icon *ngIf="!isLoading">person_add</mat-icon>
+            <mat-spinner *ngIf="isLoading" diameter="20"></mat-spinner>
+            {{isLoading ? 'Creando cuenta...' : 'Crear Cuenta'}}
+          </button>
+        </div>
+
+        <div class="login-link">
+          <p>¿Ya tienes cuenta?
+            <a (click)="navigateToLogin()" class="link">Inicia sesión aquí</a>
+          </p>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <div class="footer">
+    <p>&copy; 2025 Swim Analytics. Todos los derechos reservados.</p>
+  </div>
+</div>
